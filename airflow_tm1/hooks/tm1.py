@@ -1,8 +1,15 @@
+from typing import Any, Dict
 from TM1py.Services import TM1Service
 from airflow.hooks.base import BaseHook
 
 
 class TM1Hook(BaseHook):
+
+    conn_name_attr = "tm1_conn_id"
+    default_conn_name = "tm1_default"
+    conn_type = "tm1"
+    hook_name = "TM1"
+
     """
     Interact with IBM Cognos TM1, using the TM1py library.
     """
@@ -61,6 +68,7 @@ class TM1Hook(BaseHook):
         self.instance_name = self.tm1.server.get_server_name()
 
         return self.tm1
-
+        
+ 
     def logout(self):
         self.tm1.logout()

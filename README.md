@@ -8,6 +8,15 @@ A package that provides a hook to simplify connecting to the IBM Cognos TM1 / Pl
 * Airflow
 * TM1py
 
+## Development
+
+```
+python -m venv .env
+source .env/Scripts/activate
+python -m pip install -r requirements.txt
+python setup.py bdist_wheel
+```
+
 ## Installation
 
 Install with pip `pip install airflow-tm1`
