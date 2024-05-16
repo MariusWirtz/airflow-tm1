@@ -1,3 +1,4 @@
+from contextlib import closing
 from typing import Any, Dict
 from TM1py.Services import TM1Service
 from airflow.hooks.base import BaseHook
@@ -68,7 +69,20 @@ class TM1Hook(BaseHook):
         self.instance_name = self.tm1.server.get_server_name()
 
         return self.tm1
-        
+    
+
+    def test_connection(self):
+        status, message = False, ''
+        try:
+            tm1 = self.get_conn()
+            status = tm1.connection.is_connected()
+            message = 'Connection successfully tested'
+        except Exception as e:
+            status = False
+            message = str(e)
+
+        return status, message
+
  
     def logout(self):
         self.tm1.logout()
