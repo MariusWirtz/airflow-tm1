@@ -1,4 +1,4 @@
-.. airflow-tm1 Documentation
+.. airflow-proivder-tm1 Documentation
 
 Module Contents
 =======================================

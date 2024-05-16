@@ -11,7 +11,7 @@ To install airflow-tm1, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install airflow-tm1
+    $ pip install airflow-provider-tm1
 
 .. _pip: https://pip.pypa.io
 .. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/

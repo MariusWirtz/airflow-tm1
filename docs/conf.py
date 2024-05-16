@@ -17,12 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "airflow-tm1"
+project = "airflow-provider-tm1"
 copyright = "2020, Alexander Sutcliffe"
 author = "Alexander Sutcliffe"
 
 # The full version, including alpha/beta/rc tags
-release = "0.0.8"
+release = "0.0.1"
 
 
 # -- General configuration ---------------------------------------------------
