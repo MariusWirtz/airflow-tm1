@@ -4,17 +4,17 @@ A package that provides a hook to simplify connecting to the IBM Cognos TM1 / Pl
 
 ## Requirements
 
-* Python 3.6+
-* Airflow
-* TM1py
+* Python 3.7+
+* Airflow 2.2+
+* TM1py 1.4.1+
 
 ## Development
 
 ```
 python -m venv .env
-source .env/Scripts/activate
+source .env/bin/activate
 python -m pip install -r requirements.txt
-python setup.py bdist_wheel
+python -m build
 ```
 
 ## Installation

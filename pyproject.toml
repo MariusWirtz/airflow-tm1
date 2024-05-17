@@ -6,12 +6,12 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "airflow-provider-tm1"
+name = "airflow-providers-tm1"
 version = "0.0.1"
 authors = [
   {name = "Akos Andras Nagy", email = "akos.nagy@knowledgeseed.ch"},
-  {name = "Alexander Sutcliffe"},
-  {name = "Marius Wirtz"}
+  {name = "Alexander Sutcliffe", email = "sutcliffe.alex@gmail.com"},
+  {name = "Marius Wirtz", email = "mwirtz@cubewise.com"}
 ]
 description = "A package to simplify connecting to the TM1 REST API from Apache Airflow"
 readme = "README.md"
@@ -25,7 +25,7 @@ dependencies = [
 find = {namespaces = false} 
 
 [project.entry-points."apache_airflow_provider"]
-provider_info = "airflow_provider_tm1.__init__:get_provider_info"
+provider_info = "airflow_providers_tm1.__init__:get_provider_info"
 
 
 [tool.black]
