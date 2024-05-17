@@ -1,12 +1,17 @@
-## This is needed to allow Airflow to pick up specific metadata fields it needs for certain features. We recognize it's a bit unclean to define these in multiple places, but at this point it's the only workaround if you'd like your custom conn type to show up in the Airflow UI.
+"""A TM1 provider package for Airflow"""
+__version__ = "0.0.1"
+
+
 def get_provider_info():
     return {
         "package-name": "airflow-provider-tm1",
-        "name": "Airflow TM1",
-        "description": "Apache Airflow Provider for TM1",
-        'hooks': [{'integration-name': 'Apache Airflow Provider TM1', 'python-modules': ['airflow_provider_tm1.hooks.tm1']}],
-        'hook-class-names': ['airflow_provider_tm1.hooks.tm1.TM1Hook'],
-        'connection-types': [
-            {'hook-class-name': 'airflow_provider_tm1.hooks.tm1.TM1Hook', 'connection-type': 'tm1'}
-        ], 
+        "name": "TM1 Airflow Provider",
+        "description": "An Apache Airflow provider for TM1",
+        "connection-types": [
+            {
+                "connection-type": "tm1",
+                "hook-class-name": "airflow_provider_tm1.hooks.tm1.TM1Hook",
+            },
+        ],
+        "version": [__version__],
     }

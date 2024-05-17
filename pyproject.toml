@@ -1,0 +1,51 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airflow-provider-tm1"
+version = "0.0.1"
+authors = [
+  {name = "Akos Andras Nagy", email = "akos.nagy@knowledgeseed.ch"},
+  {name = "Alexander Sutcliffe"},
+  {name = "Marius Wirtz"}
+]
+description = "A package to simplify connecting to the TM1 REST API from Apache Airflow"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+  "apache-airflow >= 2.2",
+  "tm1py >= 1.1"
+]
+
+[tool.setuptools.packages]
+find = {namespaces = false} 
+
+[project.entry-points."apache_airflow_provider"]
+provider_info = "airflow_provider_tm1.__init__:get_provider_info"
+
+
+[tool.black]
+line-length = 120
+target-version = ["py39"]
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.mypy_cache
+    | _build
+    | buck-out
+    | build
+    | dist
+  )
+)
+'''
+
+[tool.isort]
+profile = "black"
