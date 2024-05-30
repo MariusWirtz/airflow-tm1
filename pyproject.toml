@@ -7,19 +7,30 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "airflow-providers-tm1"
-version = "0.0.1"
+version = "0.0.5"
 authors = [
   {name = "Akos Andras Nagy", email = "akos.nagy@knowledgeseed.ch"},
-  {name = "Alexander Sutcliffe", email = "sutcliffe.alex@gmail.com"},
+  {name = "Marius Wirtz", email = "mwirtz@cubewise.com"},
+  {name = "Alexander Sutcliffe", email = "sutcliffe.alex@gmail.com"}
+]
+maintainers = [
+  {name = "Akos Andras Nagy", email = "akos.nagy@knowledgeseed.ch"},
   {name = "Marius Wirtz", email = "mwirtz@cubewise.com"}
 ]
 description = "A package to simplify connecting to the TM1 REST API from Apache Airflow"
 readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.7"
 dependencies = [
   "apache-airflow >= 2.2",
   "tm1py >= 1.1"
 ]
+
+[project.urls]
+Documentation = "https://github.com/KnowledgeSeed/airflow-providers-tm1/blob/master/README.md"
+Repository = "https://github.com/KnowledgeSeed/airflow-providers-tm1"
+Issues = "https://github.com/KnowledgeSeed/airflow-providers-tm1/issues"
+Changelog = "https://github.com/KnowledgeSeed/airflow-providers-tm1/CHANGELOG.md"
 
 [tool.setuptools.packages]
 find = {namespaces = false} 

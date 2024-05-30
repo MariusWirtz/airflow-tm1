@@ -1,6 +1,8 @@
 # airflow-providers-tm1
 
-A package that provides a hook to simplify connecting to the IBM Cognos TM1 / Planning Analytics REST API.
+A package by Knowledgeseed and Cubewise that provides a hook to simplify connecting to the IBM Cognos TM1 / Planning Analytics REST API.
+
+https://github.com/KnowledgeSeed/airflow-providers-tm1
 
 This repository is a fork of https://github.com/MariusWirtz/airflow-tm1 and https://github.com/scrambldchannel/airflow-tm1 which offer only Airflow 1.x compatibility.
 
@@ -23,7 +25,7 @@ python -m build
 
 ## Installation
 
-Install with pip `pip install airflow-tm1`
+Install with pip `pip install airflow-providers-tm1`
 
 ## Usage
 
