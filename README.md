@@ -39,6 +39,8 @@ Create a connection in Airflow with at least the following parameters set:
 
 Any other parameter accepted by the TM1py RestService constructor (eg base_url, namespace etc) can also be added as a key in the Extras field in the connection.
 
+![airflow_tm1_conn](docs/airflow_tm1_conn.png)
+
 In your DAG file:
 
 ```python
