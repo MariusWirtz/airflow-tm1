@@ -1,0 +1,50 @@
+name: Build & test Airflow
+on:
+  workflow_dispatch:
+jobs:
+
+  build:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    
+    steps:
+  
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt build
+        python -m build
+        pip install airflow-tm1
+    
+    - name: Install & run tm1-docker
+      run: |
+        docker login -u ${{ secrets.DUSERNAME }} -p ${{ secrets.DPASSWORD }}
+        docker pull knowledgeseed/tm1-docker:2.0.9.15-centos7
+        docker run --rm -it -d -v ./tm1models:/docker-entrypoint-initdb.d/tm1models -v ./cogstartup.xml:/docker-entrypoint-initdb.d/cogstartup.xml -p 5360:5360 -p 5898:5898 --name tm1-docker knowledgeseed/tm1-docker:2.0.9.15-centos7
+
+    - name: Install & run Airflow
+      run: |
+        echo -e "AIRFLOW_UID=$(id -u)" > .env
+        mkdir -p ./dags ./logs ./plugins ./config
+        cp dist/airflow_providers_tm1-0.0.1-py3-none-any.whl ./plugins
+        curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.9.1/docker-compose.yaml'
+        sed -i 's/image:/# image:/g' docker-compose.yaml
+        sed -i 's/# build:/build:/g' docker-compose.yaml
+        sed -i 's/# image: postgres:13/image: postgres:13/g' docker-compose.yaml
+        sed -i 's/# image: redis:7.2-bookworm/image: redis:7.2-bookworm/g' docker-compose.yaml
+        echo ${{ vars.DOCKERFILE }} | base64 -d > Dockerfile
+        docker-compose -f "docker-compose.yaml" up -d airflow-init
+        docker-compose -f "docker-compose.yaml" up -d --build
+    
+    - name: Stop docker containers & logout
+      run: |
+        docker-compose down --volumes --rmi all
+        docker stop tm1-docker
+        docker logout
+        
