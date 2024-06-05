@@ -54,6 +54,12 @@ This will attempt to connect to the TM1 server using the details provided and in
 
 See [TM1py](https://github.com/cubewise-code/tm1py) for more details.
 
+## Manual integration testing
+
+Use `tests_integration/docker-compose.yaml` as a baseline, which spins up an Airflow including the TM1 provider and a base TM1 database to test against. Please note that `tm1-docker` image is properietary IBM product wrapped in Docker by Knowledgeseed and therefore it is only available internally for Knowledgeseed developers.
+
+To obtain a licensed IBM TM1 database for testing or production purpose, please see https://www.ibm.com/topics/tm1 for further details.
+
 ## License
 
 See [LICENSE](https://github.com/scrambldchannel/airflow-tm1/LICENSE)
