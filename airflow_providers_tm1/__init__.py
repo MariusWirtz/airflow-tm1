@@ -1,5 +1,5 @@
 """A TM1 provider package for Airflow"""
-__version__ = "0.0.6"
+__version__ = "0.0.7"
 
 
 def get_provider_info():
