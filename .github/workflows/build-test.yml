@@ -22,9 +22,14 @@ jobs:
         python -m build
         pip install airflow-tm1
     
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DUSERNAME }}
+        password: ${{ secrets.DPASSWORD }}
+    
     - name: Install & run tm1-docker
       run: |
-        docker login -u ${{ secrets.DUSERNAME }} -p ${{ secrets.DPASSWORD }}
         docker pull knowledgeseed/tm1-docker:2.0.9.15-centos7
         docker run --rm -it -d -v ./tm1models:/docker-entrypoint-initdb.d/tm1models -v ./cogstartup.xml:/docker-entrypoint-initdb.d/cogstartup.xml -p 5360:5360 -p 5898:5898 --name tm1-docker knowledgeseed/tm1-docker:2.0.9.15-centos7
 
@@ -39,5 +44,4 @@ jobs:
       run: |
         docker-compose down --volumes --rmi all
         docker stop tm1-docker
-        docker logout
         
