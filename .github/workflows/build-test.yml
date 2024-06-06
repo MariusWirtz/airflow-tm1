@@ -31,16 +31,9 @@ jobs:
     - name: Install & run Airflow
       run: |
         echo -e "AIRFLOW_UID=$(id -u)" > .env
-        mkdir -p ./dags ./logs ./plugins ./config
-        cp dist/airflow_providers_tm1-0.0.1-py3-none-any.whl ./plugins
-        curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.9.1/docker-compose.yaml'
-        sed -i 's/image:/# image:/g' docker-compose.yaml
-        sed -i 's/# build:/build:/g' docker-compose.yaml
-        sed -i 's/# image: postgres:13/image: postgres:13/g' docker-compose.yaml
-        sed -i 's/# image: redis:7.2-bookworm/image: redis:7.2-bookworm/g' docker-compose.yaml
-        echo ${{ vars.DOCKERFILE }} | base64 -d > Dockerfile
-        docker-compose -f "docker-compose.yaml" up -d airflow-init
-        docker-compose -f "docker-compose.yaml" up -d --build
+        cd tests_integration
+        docker-compose up -d airflow-init
+        docker-compose up -d --build
     
     - name: Stop docker containers & logout
       run: |
