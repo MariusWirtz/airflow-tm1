@@ -28,20 +28,15 @@ jobs:
         username: ${{ secrets.DUSERNAME }}
         password: ${{ secrets.DPASSWORD }}
     
-    - name: Install & run tm1-docker
-      run: |
-        docker pull knowledgeseed/tm1-docker:2.0.9.15-centos7
-        docker run --rm -it -d -v ./tm1models:/docker-entrypoint-initdb.d/tm1models -v ./cogstartup.xml:/docker-entrypoint-initdb.d/cogstartup.xml -p 5360:5360 -p 5898:5898 --name tm1-docker knowledgeseed/tm1-docker:2.0.9.15-centos7
-
     - name: Install & run Airflow
       run: |
-        echo -e "AIRFLOW_UID=$(id -u)" > .env
         cd tests_integration
-        docker-compose up -d airflow-init
-        docker-compose up -d --build
+        echo -e "AIRFLOW_UID=$(id -u)" > .env
+        docker compose up -d airflow-init
+        docker compose up -d --build
     
-    - name: Stop docker containers & logout
+    - name: Stop docker containers
       run: |
-        docker-compose down --volumes --rmi all
-        docker stop tm1-docker
+        cd tests_integration
+        docker compose down
         
